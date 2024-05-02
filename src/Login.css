@@ -1,0 +1,20 @@
+.closeButton {
+    position: absolute;
+    right: 30px;
+    top: 20px;
+}
+
+.loginForm {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    background-color: snow;
+    border: 1px solid black;
+    border-radius: 15%;
+    width: 60%;
+    height: 60%;
+    margin: auto;
+    padding: 5%;
+    position: relative;
+    top: 20%;
+}

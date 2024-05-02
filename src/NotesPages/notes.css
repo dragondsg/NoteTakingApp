@@ -1,0 +1,10 @@
+.headerInput {
+    margin: 20px;
+    font-size: 4rem;
+    padding: 10px;
+    width: 90%;
+}
+.bodyInput {
+    width: 90%;
+    height: 60%;
+}
