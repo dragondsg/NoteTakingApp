@@ -44,23 +44,14 @@ export const NotesProvider = ({ children }: { children: ReactNode }) => {
           setCurrentUser(JSON.parse(maybeUser));
         }
       });
-  const addUser = (username: string, password: string) => {
-    return Request.postUser(username, password)
-      .then(() => {
-        toast.success("Account added.");
-        refetchUsers();
-      })
-      .catch(() => {
-        toast.error("Account failed to add.");
-      });
-  };
   const logInUser = (username: string, password: string) => {
     let filteredUsers = allUsers.filter(
       (user) => user.username == username && user.password == password
     );
+    console.log('login: ', username, password);
     if (filteredUsers.length > 0) {
       setCurrentUser(filteredUsers[0]);
-      localStorage.setItem("user", JSON.stringify(currentUser));
+      localStorage.setItem("user", JSON.stringify(filteredUsers[0]));
     } else {
       toast.error("No account matching username and password.");
     }
@@ -68,6 +59,17 @@ export const NotesProvider = ({ children }: { children: ReactNode }) => {
   const logOutUser = () => {
     setCurrentUser(guest);
     localStorage.removeItem("user");
+  };
+  const addUser = (username: string, password: string) => {
+    return Request.postUser(username, password)
+      .then(() => {
+        console.log("Account added");
+        toast.success("Account added.");
+        refetchUsers();
+      })
+      .catch(() => {
+        toast.error("Account failed to add.");
+      });
   };
 
   const addNote = (title: string, text: string, user: number) => {

@@ -1,1 +1,17 @@
-{"users":[{"username":"Guest","password":"","id":0}],"notes":[{"title":"Base Note","text":"This is a sample note.","user":0,"id":1}]}
+{
+  "users": [
+    {
+      "username": "Guest",
+      "password": "",
+      "id": 0
+    }
+  ],
+  "notes": [
+    {
+      "title": "Base Note",
+      "text": "This is a sample note.",
+      "user": 0,
+      "id": 1
+    }
+  ]
+}

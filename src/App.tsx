@@ -27,6 +27,7 @@ function App() {
           <button
             onClick={() => {
               noteFunctions.addNote("", "", userData.currentUser.id);
+              // Stuff HERE!!! Auto go to note.
             }}
           >
             +

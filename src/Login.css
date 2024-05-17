@@ -10,11 +10,12 @@
     flex-direction: column;
     background-color: snow;
     border: 1px solid black;
-    border-radius: 15%;
+    border-radius: 25px;
     width: 60%;
     height: 60%;
     margin: auto;
     padding: 5%;
     position: relative;
     top: 20%;
+    gap: 20px;
 }

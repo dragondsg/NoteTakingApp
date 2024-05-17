@@ -1,12 +1,14 @@
 import { useState, useContext, useEffect } from "react";
 import { NotesContext } from "./provider";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 
 export function LoginApp() {
   const { userData } = useContext(NotesContext);
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     userData.refetchUsers();
@@ -20,8 +22,10 @@ export function LoginApp() {
       <form
         className="loginForm"
         onSubmit={(e) => {
+          console.log("submit");
           e.preventDefault();
           userData.logInUser(username, password);
+          //navigate("/");
         }}
       >
         <label>Username:</label>
@@ -44,8 +48,11 @@ export function LoginApp() {
           <button type="submit">Log In</button>
           <button
             onClick={() => {
-              userData.addUser(username, password);
-              userData.logInUser(username, password);
+              console.log("Sign Up click");
+              userData
+                .addUser(username, password)
+                .then(() => userData.logInUser(username, password))
+                .then(() => navigate("/"));
             }}
           >
             Sign Up
