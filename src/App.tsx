@@ -2,11 +2,13 @@ import { useEffect, useContext } from "react";
 import { NotesContext } from "./provider";
 import { NoteCard } from "./card";
 import "./App.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function App() {
   const { allNotes, noteFunctions, userData } = useContext(NotesContext);
   const loggedIn = userData.currentUser.id != 0;
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     noteFunctions.refetch();
@@ -27,7 +29,7 @@ function App() {
           <button
             onClick={() => {
               noteFunctions.addNote("", "", userData.currentUser.id);
-              // Stuff HERE!!! Auto go to note.
+              navigate(`/Note/?note=${Math.max(...allNotes.map((n)=>n.id))+1}`);
             }}
           >
             +

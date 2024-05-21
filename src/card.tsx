@@ -13,7 +13,7 @@ export function NoteCard({
       <div className={"cardHeader"}>
         <h3>{note.title}</h3>
         <div>
-          <Link to={"/Note/?note=" + `${note.id}`}>
+          <Link to={`/Note/?note=${note.id}`}>
             <button>Edit</button>
           </Link>
           <button

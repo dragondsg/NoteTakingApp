@@ -25,7 +25,7 @@ export function LoginApp() {
           console.log("submit");
           e.preventDefault();
           userData.logInUser(username, password);
-          //navigate("/");
+          navigate("/");
         }}
       >
         <label>Username:</label>
@@ -49,10 +49,9 @@ export function LoginApp() {
           <button
             onClick={() => {
               console.log("Sign Up click");
-              userData
-                .addUser(username, password)
-                .then(() => userData.logInUser(username, password))
-                .then(() => navigate("/"));
+              userData.addUser(username, password);
+              userData.logInUser(username, password);
+              navigate("/");
             }}
           >
             Sign Up

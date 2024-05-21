@@ -48,7 +48,7 @@ export const NotesProvider = ({ children }: { children: ReactNode }) => {
     let filteredUsers = allUsers.filter(
       (user) => user.username == username && user.password == password
     );
-    console.log('login: ', username, password);
+    console.log("login: ", username, password, allUsers);
     if (filteredUsers.length > 0) {
       setCurrentUser(filteredUsers[0]);
       localStorage.setItem("user", JSON.stringify(filteredUsers[0]));

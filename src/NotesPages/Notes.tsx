@@ -1,7 +1,7 @@
 import "./notes.css";
 import { useContext, useState, useEffect } from "react";
 import { NotesContext } from "../provider";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams, useNavigate } from "react-router-dom";
 
 const usePage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -20,6 +20,7 @@ export function NoteApp() {
   const { allNotes, noteFunctions } = useContext(NotesContext);
 
   const [id, setId] = usePage();
+  const navigate = useNavigate();
 
   const [title, setTitle] = useState<string>("");
   const [body, setBody] = useState<string>("");
@@ -37,6 +38,7 @@ export function NoteApp() {
         onSubmit={(e) => {
           e.preventDefault();
           noteFunctions.updateNote(title, body, id);
+          navigate('/');
         }}
       >
         <input
@@ -52,6 +54,7 @@ export function NoteApp() {
           onChange={(e) => {
             setBody(e.target.value);
           }}
+          rows={40}
         />
         <div className="buttonArea">
           <Link to="/">
