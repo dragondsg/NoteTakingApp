@@ -6,39 +6,9 @@
       "id": 0
     },
     {
-      "username": "1",
-      "password": "2",
-      "id": 1
-    },
-    {
-      "username": "4",
-      "password": "b",
-      "id": 2
-    },
-    {
-      "username": "6",
-      "password": "d",
-      "id": 3
-    },
-    {
-      "username": "c",
-      "password": "c",
-      "id": 4
-    },
-    {
-      "username": "2",
-      "password": "f",
-      "id": 5
-    },
-    {
-      "username": "d",
-      "password": "h",
-      "id": 6
-    },
-    {
       "username": "Daniel",
       "password": "1234",
-      "id": 7
+      "id": 1
     }
   ],
   "notes": [
@@ -51,7 +21,7 @@
     {
       "title": "Note:",
       "text": "Remember to make this note area bigger.\nAlso remember to fix the sign up.",
-      "user": 7,
+      "user": 1,
       "id": 2
     }
   ]
