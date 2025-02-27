@@ -6,6 +6,7 @@ export const Request = {
   getAllUsers: () => fetch(userUrl).then((response) => response.json()),
   
   postUser: (username: string, password: string) => {
+    console.log("postUser");
     return fetch(userUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -23,7 +24,8 @@ export const Request = {
 
   getAllNotes: () => fetch(notesUrl).then((response) => response.json()),
 
-  postNote: (title: string, text: string, user: number) => {
+  postNote: (title: string, text: string, user: string) => {
+    console.log("postNote");
     return fetch(notesUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -40,7 +42,8 @@ export const Request = {
     });
   },
 
-  updateNote: (title: string, text: string, id: number) => {
+  updateNote: (title: string, text: string, id: string) => {
+    console.log("updateNote");
     return fetch(notesUrl + "/" + id, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
@@ -52,7 +55,8 @@ export const Request = {
       });
   },
 
-  deleteNote: (id: number) => {
+  deleteNote: (id: string) => {
+    console.log("deletenote");
     return fetch(notesUrl + "/" + id, {
       method: "DELETE",
     });

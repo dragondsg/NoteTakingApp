@@ -3,10 +3,11 @@ import { NotesContext } from "./provider";
 import { NoteCard } from "./card";
 import "./App.css";
 import { Link, useNavigate } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const { allNotes, noteFunctions, userData } = useContext(NotesContext);
-  const loggedIn = userData.currentUser.id != 0;
+  const loggedIn = userData.currentUser.id != "0";
 
   const navigate = useNavigate();
 
@@ -29,7 +30,7 @@ function App() {
           <button
             onClick={() => {
               noteFunctions.addNote("", "", userData.currentUser.id);
-              navigate(`/Note/?note=${Math.max(...allNotes.map((n)=>n.id))+1}`);
+              navigate(`/Note/?note=${Math.max(...allNotes.map((n)=>parseInt(n.id)))+1}ID`); // SAME HERE!!!
             }}
           >
             +
@@ -38,11 +39,12 @@ function App() {
       </div>
       <div className={"noteBody"}>
         {allNotes
-          .filter((note) => note.user == userData.currentUser.id)
+          .filter((note) => note.user === userData.currentUser.id)
           .map((note) => (
             <NoteCard note={note} deleteNote={noteFunctions.deleteNote} />
           ))}
       </div>
+      <Toaster />
     </>
   );
 }

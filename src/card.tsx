@@ -6,7 +6,7 @@ export function NoteCard({
   deleteNote,
 }: {
   note: Note;
-  deleteNote: (id: number) => Promise<void>;
+  deleteNote: (id: string) => Promise<void>;
 }) {
   return (
     <div className={"noteCard"}>

@@ -6,9 +6,9 @@ import { Link, useSearchParams, useNavigate } from "react-router-dom";
 const usePage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchPrimitive, setSearchPrimitive] = useState(
-    parseInt(searchParams.get("note") as string)
+    searchParams.get("note") as string
   );
-  const setPage = (id: number) => {
+  const setPage = (id: string) => {
     searchParams.set("note", `${id}`);
     setSearchPrimitive(id);
     setSearchParams();

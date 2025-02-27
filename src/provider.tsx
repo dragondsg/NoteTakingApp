@@ -7,9 +7,9 @@ type Tnotes = {
   allNotes: Note[];
   noteFunctions: {
     refetch: () => Promise<void>;
-    addNote: (title: string, text: string, user: number) => Promise<void>;
-    updateNote: (title: string, text: string, id: number) => Promise<void>;
-    deleteNote: (id: number) => Promise<void>;
+    addNote: (title: string, text: string, user: string) => Promise<void>;
+    updateNote: (title: string, text: string, id: string) => Promise<void>;
+    deleteNote: (id: string) => Promise<void>;
   };
   userData: {
     currentUser: User;
@@ -23,7 +23,7 @@ type Tnotes = {
 const guest = {
   username: "Guest",
   password: "",
-  id: 0,
+  id: "0",
 };
 
 export const NotesContext = createContext<Tnotes>({} as Tnotes);
@@ -72,12 +72,12 @@ export const NotesProvider = ({ children }: { children: ReactNode }) => {
       });
   };
 
-  const addNote = (title: string, text: string, user: number) => {
+  const addNote = (title: string, text: string, user: string) => {
     const tempNote = {
       title,
       text,
       user,
-      id: Math.max(...allNotes.map((note) => note.id)) + 1,
+      id: (Math.max(...allNotes.map((note) => parseInt(note.id))) + 1) + "ID", // HERE!!!!!!!!!!!!!!!!!!!!!!!!!
     };
     setAllNotes(allNotes.concat(tempNote));
     return Request.postNote(title, text, user)
@@ -90,7 +90,7 @@ export const NotesProvider = ({ children }: { children: ReactNode }) => {
       });
   };
 
-  const updateNote = (title: string, text: string, id: number) => {
+  const updateNote = (title: string, text: string, id: string) => {
     setAllNotes(
       allNotes.map((note) => {
         if (id == note.id) {
@@ -113,7 +113,7 @@ export const NotesProvider = ({ children }: { children: ReactNode }) => {
       });
   };
 
-  const deleteNote = (id: number) => {
+  const deleteNote = (id: string) => {
     setAllNotes(allNotes.filter((note) => note.id != id));
     return Request.deleteNote(id)
       .then(() => {
