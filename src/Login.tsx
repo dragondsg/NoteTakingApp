@@ -19,6 +19,7 @@ export function LoginApp() {
       <Link to="/" className="closeButton">
         <button>X</button>
       </Link>
+      <img src="./img/stickyNoteJokes.png" className="stickys" />
       <form
         className="loginForm"
         onSubmit={(e) => {
@@ -46,12 +47,11 @@ export function LoginApp() {
         />
         <div>
           <button type="submit">Log In</button>
-          <button
+          <button type="button"
             onClick={() => {
-              console.log("Sign Up click");
               userData.addUser(username, password);
-              userData.logInUser(username, password);
-              navigate("/");
+              //.then(() => userData.logInUser(username, password));
+              //navigate("/");
             }}
           >
             Sign Up

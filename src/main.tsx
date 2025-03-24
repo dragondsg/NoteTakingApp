@@ -5,6 +5,7 @@ import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { NotesProvider } from "./provider";
 import { NoteApp } from "./NotesPages/Notes.tsx";
+import { CharApp } from "./NotesPages/Characters.tsx";
 import { LoginApp } from "./Login.tsx";
 
 const router = createBrowserRouter([
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
   {
     path: "/Note",
     element: <NoteApp />,
+  },
+  {
+    path: "/Character",
+    element: <CharApp />
   },
   {
     path: "/Login",

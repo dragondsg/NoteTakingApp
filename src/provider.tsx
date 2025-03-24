@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useState } from "react";
 import { toast } from "react-hot-toast";
-import { Note, User } from "./types";
+import { Note, User, Character } from "./types";
 import { Request } from "../api";
 
 type Tnotes = {
@@ -18,12 +18,19 @@ type Tnotes = {
     logInUser: (username: string, password: string) => void;
     logOutUser: () => void;
   };
+  charFunctions: {
+    refetchChars: () => Promise<void>;
+    addChar: (name: string, race: string, occupation: string, description: string, user: string) => Promise<void>;
+    updateChar: (name: string, race: string, occupation: string, description: string, id: string) => Promise<void>;
+    deleteChar: (id: string) => Promise<void>;
+  };
+  allChars: Character[];
 };
 
 const guest = {
   username: "Guest",
   password: "",
-  id: "0",
+  id: "0ID",
 };
 
 export const NotesContext = createContext<Tnotes>({} as Tnotes);
@@ -32,18 +39,19 @@ export const NotesProvider = ({ children }: { children: ReactNode }) => {
   const [currentUser, setCurrentUser] = useState<User>(guest);
   const [allUsers, setAllUsers] = useState<User[]>([]);
   const [allNotes, setAllNotes] = useState<Note[]>([]);
+  const [allChars, setAllChars] = useState<Character[]>([]);
 
   const refetch = () => Request.getAllNotes().then(setAllNotes);
 
-  const refetchUsers = () =>
-    Request.getAllUsers()
+  const refetchUsers = () => {
+    return Request.getAllUsers()
       .then(setAllUsers)
       .then(() => {
         const maybeUser = localStorage.getItem("user");
         if (maybeUser) {
           setCurrentUser(JSON.parse(maybeUser));
         }
-      });
+      })};
   const logInUser = (username: string, password: string) => {
     let filteredUsers = allUsers.filter(
       (user) => user.username == username && user.password == password
@@ -63,9 +71,8 @@ export const NotesProvider = ({ children }: { children: ReactNode }) => {
   const addUser = (username: string, password: string) => {
     return Request.postUser(username, password)
       .then(() => {
-        console.log("Account added");
         toast.success("Account added.");
-        refetchUsers();
+        refetchUsers().then(() => logInUser(username, password));
       })
       .catch(() => {
         toast.error("Account failed to add.");
@@ -73,16 +80,10 @@ export const NotesProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const addNote = (title: string, text: string, user: string) => {
-    const tempNote = {
-      title,
-      text,
-      user,
-      id: (Math.max(...allNotes.map((note) => parseInt(note.id))) + 1) + "ID", // HERE!!!!!!!!!!!!!!!!!!!!!!!!!
-    };
-    setAllNotes(allNotes.concat(tempNote));
     return Request.postNote(title, text, user)
       .then(() => {
         toast.success("Note added.");
+        refetch();
       })
       .catch(() => {
         toast.error("Note failed to add.");
@@ -125,6 +126,56 @@ export const NotesProvider = ({ children }: { children: ReactNode }) => {
       });
   };
 
+  const refetchChars = () => Request.getAllCharacters().then(setAllChars);
+
+  const addChar = (name: string, race: string, occupation: string, description: string, user: string) => {
+    return Request.postChar(name, race, occupation, description, user)
+      .then(() => {
+        toast.success("Character added.");
+        refetch();
+      })
+      .catch(() => {
+        toast.error("Character failed to add.");
+      });
+  };
+
+  const updateChar = (name: string, race: string, occupation: string, description: string, id: string) => {
+    setAllChars(
+      allChars.map((char) => {
+        if (id == char.id) {
+          let tempChar = char;
+          tempChar.name = name;
+          tempChar.race = race;
+          tempChar.occupation = occupation;
+          tempChar.description = description;
+          return tempChar;
+        } else {
+          return char;
+        }
+      })
+    );
+    return Request.updateChar(name, race, occupation, description, id)
+    .then(() => {
+      toast.success("Character Saved");
+    })
+    .catch(() => {
+      toast.error("Save Failed");
+      refetchChars();
+    });
+  };
+
+  const deleteChar = (id: string) => {
+    setAllChars(allChars.filter((char) => char.id != id));
+    return Request.deleteChar(id)
+      .then(() => {
+        toast.success("Character deleted.");
+      })
+      .catch(() => {
+        toast.error("Character failed to delete.");
+        refetch();
+      });
+  };
+
   const noteFunctions = {
     refetch,
     addNote,
@@ -140,8 +191,15 @@ export const NotesProvider = ({ children }: { children: ReactNode }) => {
     logOutUser,
   };
 
+  const charFunctions = {
+    refetchChars,
+    addChar,
+    updateChar,
+    deleteChar,
+  };
+
   return (
-    <NotesContext.Provider value={{ allNotes, noteFunctions, userData }}>
+    <NotesContext.Provider value={{ allNotes, noteFunctions, userData, charFunctions, allChars }}>
       {children}
     </NotesContext.Provider>
   );

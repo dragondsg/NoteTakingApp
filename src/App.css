@@ -4,14 +4,19 @@
   width: 100%;
   height: 100%;
   text-align: center;
+  background-image: url("../img/tileableParchment.png");
+  background-size: 800px 800px;
 }
 
 .header {
   position: absolute;
   top: 0;
   width: 100%;
-  height: 3rem;
+  height: 5rem;
   display: flex;
+  background-color: #3c2205;
+  color: white;
+  align-items: center;
 }
 
 .header div {
@@ -20,22 +25,37 @@
 }
 
 h2 {
-  margin: none;
-  margin-left: 1rem;
+  margin: auto;
   margin-top: 3px;
+  font-size: 3rem;
 }
 
 .noteBody {
   position: absolute;
-  top: 3rem;
+  top: 5rem;
   display: flex;
   flex-wrap: wrap;
+  margin: 2.5%;
+  width: 95%;
+  justify-content: center;
 }
 
 .noteCard {
+  background-color: white;
   border: 1px solid black;
   width: 300px;
   margin: 3px;
+  overflow: hidden;
+  border-radius: 10px;
+  padding: 2px;
+}
+
+.noteCard p {
+  white-space: pre-wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 5px;
+  max-height: 20rem;
 }
 
 .cardHeader {
@@ -58,4 +78,5 @@ h3 {
 button {
   padding: 2px;
   margin: 2px;
+  box-shadow: grey -2px 2px 5px;
 }

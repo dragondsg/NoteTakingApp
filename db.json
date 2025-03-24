@@ -6,7 +6,7 @@
       "id": "0ID"
     },
     {
-      "username": "Daniel",
+      "username": "daniel",
       "password": "1234",
       "id": "1ID"
     }
@@ -14,15 +14,31 @@
   "notes": [
     {
       "title": "Base Note",
-      "text": "This is a sample note.",
+      "text": "This is a sample note.\nSupercalafragalisinepimalidocious\nAntidisastablishmentarianism.",
       "user": "0ID",
       "id": "1ID"
     },
     {
       "title": "Note:",
-      "text": "Remember to make this note area bigger.\nAlso remember to fix the sign up.",
+      "text": "Make sure everything is done.",
       "user": "1ID",
       "id": "2ID"
+    },
+    {
+      "title": "Long Note",
+      "text": "It was a dark and stormy night. Suddenly a shot rang out. The maid screamed. While millions of people were starving, the king lived in luxury. Meanwhile, the girl with the tattered shawl had not sold a violet all day.\n\nYes, this is a reference to Snoopy, who likes to sit on his doghouse and write. No one does that anymore. No one uses typewriters, and there aren't often plugs or good internet to sit on the doghouse and write. It's hard to type while sitting in a tree too.\n\nThus, I recommend typing sitting on a couch while eating chocolate, preferably a good Belgium chocolate, definitely something European. American chocolate isn't very good. Their cheese is worse. Who wants American cheese? It's more like plastic than food.",
+      "user": "0ID",
+      "id": "2DklyL0"
+    }
+  ],
+  "characters": [
+    {
+      "name": "Joe",
+      "race": "Human",
+      "occupation": "Fighter",
+      "description": "Basic",
+      "user": "0ID",
+      "id": " hdconov3q"
     }
   ]
 }

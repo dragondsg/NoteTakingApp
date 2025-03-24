@@ -9,3 +9,11 @@ export type User = {
     password: string,
     id: string,
 }
+export type Character = {
+    name: string,
+    race: string,
+    occupation: string,
+    description: string,
+    user: string,
+    id: string,
+}

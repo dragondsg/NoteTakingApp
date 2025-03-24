@@ -1,0 +1,16 @@
+form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+.input {
+    font-size: 3rem;
+    width: 80%;
+}
+.block {
+    font-size: 3rem;
+    display: flex;
+    width: 90%;
+    justify-content: space-between;
+}
