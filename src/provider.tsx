@@ -13,6 +13,7 @@ type Tnotes = {
   };
   userData: {
     currentUser: User;
+    allUsers: User[];
     refetchUsers: () => Promise<void>;
     addUser: (username: string, password: string) => Promise<void>;
     logInUser: (username: string, password: string) => void;
@@ -185,6 +186,7 @@ export const NotesProvider = ({ children }: { children: ReactNode }) => {
 
   const userData = {
     currentUser,
+    allUsers,
     refetchUsers,
     addUser,
     logInUser,

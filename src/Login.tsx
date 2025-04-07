@@ -5,8 +5,8 @@ import "./Login.css";
 
 export function LoginApp() {
   const { userData } = useContext(NotesContext);
-  const [username, setUsername] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const [ username, setUsername ] = useState<string>("");
+  const [ password, setPassword ] = useState<string>("");
 
   const navigate = useNavigate();
 
@@ -19,7 +19,7 @@ export function LoginApp() {
       <Link to="/" className="closeButton">
         <button>X</button>
       </Link>
-      <img src="./img/stickyNoteJokes.png" className="stickys" />
+      <img src="../img/stickyNoteJokes.png" className="stickys" />
       <form
         className="loginForm"
         onSubmit={(e) => {
@@ -49,7 +49,11 @@ export function LoginApp() {
           <button type="submit">Log In</button>
           <button type="button"
             onClick={() => {
-              userData.addUser(username, password);
+              if (!userData.allUsers.map((n) => n.username).includes(username) && /[a-zA-Z]/.test(username)) {
+                userData.addUser(username, password);
+              } else {
+                //toast.error("Username already exist or does not contain letters.");
+              }
               //.then(() => userData.logInUser(username, password));
               //navigate("/");
             }}
